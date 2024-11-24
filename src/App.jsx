@@ -1,8 +1,9 @@
 import React from 'react'
+import { useState,useContext } from 'react'
 
 const App = () => {
   return (
-    <div>App</div>
+    <div className='text-xl font-bold text-center'>App</div>
   )
 }
 
