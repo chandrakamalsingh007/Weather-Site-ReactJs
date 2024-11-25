@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useContext } from "react"
+import { FaSearch } from "react-icons/fa";
 
 const App = () => {
   const [input, setInput] = useState("");
@@ -9,7 +10,7 @@ const App = () => {
       <nav className="w-full p-3 flex justify-between items-center">
         <h1 className="text-black font-bold tracking-wide text-3xl">Weather App</h1>
         <div className="bg-white w-[15rem] overflow-hidden shadow-2xl rounded flex items-center p-2 gap-2">
-         <img src="" alt="search" />
+        <FaSearch color="black" />
           <input
             onKeyUp={(e) => {
               if (e.key === "Enter") {
