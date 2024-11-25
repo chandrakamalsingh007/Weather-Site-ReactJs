@@ -20,7 +20,7 @@ const MainWeather = ({ weatherData }) => {
   const iconCode = weatherData?.weather?.[0]?.icon || "01d";
   const weatherIcon = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
   return (
-    <div className="bg-[#4B5563] text-white rounded-xl w-[220px] p-[30px] m-5">
+    <div className="bg-[#4B5563] text-white rounded-xl w-[220px] p-[30px]">
       <div className="text-xl ">
         <p>Current Weather</p>
       </div>

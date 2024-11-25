@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import MainWeather from "./components/MainWeather";
+import sevenDayForecast from "./components/sevenday";
 import axios from "axios";
 
 const App = () => {
@@ -69,11 +70,13 @@ const App = () => {
     <>
       <Navbar onSearch={handleSearch} />
       {weatherData && (
-        <div className="flex p-xl-3 gap-2">
+        <div className="flex p-[30px] gap-[20px]">
           <div className="flex-1 mr-1">
             <MainWeather
               weatherData={weatherData}
             />
+            <p className="font-bold text-xl  p-[30px]">7 Days Forecast</p>
+            {sevenDayForecast && <sevenDayForecast forecastData={sevenDayForecast} />}
           </div>
         </div>
       )}
