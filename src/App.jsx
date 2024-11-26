@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import MainWeather from "./components/MainWeather";
-import SevenDayForecast from "./components/sevenday";
+import SevenDayForecast from "./components/Sevenday"
 import TodayHighlights from "./components/Todayhighlights";
 import axios from "axios";
 
