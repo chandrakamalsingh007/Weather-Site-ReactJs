@@ -13,7 +13,7 @@ const handleSearchClick=()=>{
     }
 }
   return (
-    <nav className="flex items-center justify-between p-5  ">
+    <nav className="flex items-center justify-between p-5   ">
       <div className="flex items-center gap-2 text-lg">
         <FilterDramaIcon className="text-[#4B5550]" />
         <p className="font-bold text-[#4B5550]">HamroWeather</p>
