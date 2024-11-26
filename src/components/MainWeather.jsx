@@ -1,12 +1,14 @@
 import React from "react";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const MainWeather = ({ weatherData }) => {
   const temperatureCelsius = weatherData?.main?.temp || "N/A";
-  const weatherDescription = weatherData?.weather?.[0]?.description || "N/A";
-  const cityName = weatherData?.name || "city not available";
-  const countryName = weatherData?.sys?.country || "country not available";
+  const weatherDescription =
+    weatherData?.weather?.[0]?.description?.charAt(0).toUpperCase() +
+    weatherData?.weather?.[0]?.description.slice(1) || "N/A";
+  const cityName = weatherData?.name || "City not available";
+  const countryName = weatherData?.sys?.country || "Country not available";
   const timestamp = weatherData?.dt || null;
 
   const currentDate = timestamp
@@ -19,24 +21,54 @@ const MainWeather = ({ weatherData }) => {
 
   const iconCode = weatherData?.weather?.[0]?.icon || "01d";
   const weatherIcon = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
+
+  const minTemp = weatherData?.main?.temp_min || "N/A";
+  const maxTemp = weatherData?.main?.temp_max || "N/A";
+
   return (
-    <div className="bg-[#4B5563] text-white rounded-xl w-[220px] p-[30px]">
-      <div className="text-xl ">
-        <p>Current Weather</p>
+    <div className="bg-gradient-to-br from-[#4B5563] to-[#2D3748] text-white rounded-xl shadow-lg p-4 w-[250px] mx-auto">
+      {/* Header */}
+      <div className="text-center mb-4">
+        <h2 className="text-xl font-bold">Current Weather</h2>
       </div>
-      <div className="flex items-center text-2xl font-bold">
-        {temperatureCelsius}°C
-        <img src={weatherIcon} alt="weatherIcon" className="w-20" />
-      </div>
-      <div className="text-md mt-1 font-semibold">{weatherDescription}</div>
-      <div className="mt-2">
-        <div className="flex items-center">
-        <CalendarMonthIcon/> 
-        {currentDate}
+
+      {/* Weather Info */}
+      <div className="flex items-center justify-between">
+        {/* Temperature */}
+        <div className="text-center">
+          <p className="text-4xl font-bold">{temperatureCelsius}°C</p>
+          <p className="text-sm font-semibold mt-2">{weatherDescription}</p>
         </div>
-        <div className="mt-1 flex items-center">
-        <LocationOnIcon/>
-        {cityName}, {countryName}
+
+        {/* Weather Icon */}
+        <img
+          src={weatherIcon}
+          alt="Weather Icon"
+          className="w-16 h-16 animate-bounce-slow"
+        />
+      </div>
+
+      {/* Date and Location */}
+      <div className="mt-4">
+        <div className="flex items-center gap-1 text-sm mb-1">
+          <CalendarMonthIcon fontSize="small" />
+          <span>{currentDate}</span>
+        </div>
+        <div className="flex items-center gap-1 text-sm mb-2">
+          <LocationOnIcon fontSize="small" />
+          <span>
+            {cityName}, {countryName}
+          </span>
+        </div>
+
+        {/* Min and Max Temperature */}
+        <div className="flex justify-between text-sm mt-2">
+          <div>
+            <span className="font-semibold">Min:</span> {minTemp}°C
+          </div>
+          <div>
+            <span className="font-semibold">Max:</span> {maxTemp}°C
+          </div>
         </div>
       </div>
     </div>

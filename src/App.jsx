@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import MainWeather from "./components/MainWeather";
 import SevenDayForecast from "./components/sevenday";
+import TodayHighlights from "./components/Todayhighlights";
 import axios from "axios";
 
 const App = () => {
@@ -9,9 +10,8 @@ const App = () => {
   const [city, setCity] = useState("pokhara");
   const [airQualityData, setAirQualityData] = useState(null);
   const [sevenDayForecast, setSevenDayForecast] = useState(null);
-  const apiKey = 'fef5789c35085a507050decb49889d42';
+  const apiKey = "fef5789c35085a507050decb49889d42";
 
-  // Fetch data whenever the city changes
   useEffect(() => {
     getWeatherData(city);
   }, [city]);
@@ -39,7 +39,6 @@ const App = () => {
         const data = response.data;
         setWeatherData(data);
 
-        // Fetch air quality data only if coordinates are available
         if (data.coord) {
           getAirQualityData(data.coord.lat, data.coord.lon);
         } else {
@@ -68,22 +67,42 @@ const App = () => {
 
   return (
     <>
-       <Navbar onSearch={handleSearch} />
-      {weatherData && (
-        <div className="flex flex-col p-6 gap-4">
-          <div className="flex-1">
-            <MainWeather weatherData={weatherData} />
-          </div>
-          <div>
-            <h2 className="font-bold text-xl mb-2 ms-5">7 Days Forecast</h2>
-            {sevenDayForecast ? (
-              <SevenDayForecast forecastData={sevenDayForecast} />
-            ) : (
-              <p>Loading forecast...</p>
-            )}
-          </div>
-        </div>
-      )}
+      <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-300 text-gray-800">
+        <Navbar onSearch={handleSearch} />
+        <main className="container mx-auto p-5">
+          {weatherData && airQualityData ? (
+            <div className="flex">
+              {/* Left Section: Fixed Width */}
+              <div className="w-[250px] space-y-2">
+                <section>
+                  <MainWeather weatherData={weatherData} />
+                </section>
+                <section>
+                  <h2 className="text-xl font-bold mb-3 ms-10">7-Days Forecast</h2>
+                  {sevenDayForecast ? (
+                    <SevenDayForecast forecastData={sevenDayForecast} />
+                  ) : (
+                    <p>Loading forecast...</p>
+                  )}
+                </section>
+              </div>
+
+              {/* Right Section: Flexible Width */}
+              <div className="flex-1 ml-6">
+                <section>
+                  <h2 className="text-2xl font-bold mb-4 text-center">Today's Highlights</h2>
+                  <TodayHighlights
+                    weatherData={weatherData}
+                    airQualityData={airQualityData}
+                  />
+                </section>
+              </div>
+            </div>
+          ) : (
+            <p className="text-center text-xl">Loading data...</p>
+          )}
+        </main>
+      </div>
     </>
   );
 };

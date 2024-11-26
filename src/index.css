@@ -5,3 +5,7 @@
 *{
   margin:0;
 }
+
+#forecast::-webkit-scrollbar{
+  width: 0;
+}
